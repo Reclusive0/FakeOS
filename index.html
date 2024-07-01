@@ -5,17 +5,181 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Windows 98 Reborn!</title>
     <link rel="stylesheet" href="./styles/style.css" />
-    <script src="scripts/script.js" defer></script>
+    <link rel="stylesheet" href="https://unpkg.com/98.css" />
+    <script type="module" src="./scripts/script.js"></script>
   </head>
   <body class="body">
-    <nav class="taskbar">
+    <!-- desktop icons -->
+    <div class="desktop-buttons">
+      <div id="mail-btn" class="desktop-icon">
+        <div class="icon-wrapper">
+          <img
+            src="https://win98icons.alexmeub.com/icons/png/outlook_express-4.png"
+          />
+        </div>
+        <div class="icon-title">Mail</div>
+      </div>
+      <div id="ie-btn" class="desktop-icon">
+        <div class="icon-wrapper">
+          <img src="https://win98icons.alexmeub.com/icons/png/msie2-2.png" />
+        </div>
+        <div class="icon-title">DANCING BABY.EXE</div>
+      </div>
+      <div id="doom-btn" class="desktop-icon">
+        <div class="icon-wrapper">
+          <img src="https://win98icons.alexmeub.com/icons/png/ms_dos-1.png" />
+        </div>
+        <div class="icon-title">DOOM</div>
+      </div>
+    </div>
+    <!-- mail modal -->
+    <div id="mail-window" class="window hidden-modal">
+      <div class="title-bar">
+        <div class="title-bar-text">Windows Mail</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body window-body--email">
+        <table id="full-table" class="interactive">
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th>Sender</th>
+              <th>Received</th>
+            </tr>
+          </thead>
+          <tbody id="email-table" class="email-table"></tbody>
+        </table>
+        <textarea name="" id="email-content" cols="80" rows="10"></textarea>
+      </div>
+    </div>
+    <!-- IE Dancing baby modal -->
+    <div id="ie-window" class="window hidden-modal">
+      <div class="title-bar">
+        <div class="title-bar-text">DANCING BABY!!! - Internet Explorer</div>
+        <div class="title-bar-controls">
+          <button id="baby-trigger" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <img
+          src="./assets/dancing-baby.gif"
+          alt="DANCING BABY!"
+          class="img-baby"
+        />
+        <p>LOOK AT THE DANCING BABY!!!</p>
+        <img
+          src="./assets/dancing-baby.gif"
+          alt="DANCING BABY!"
+          class="img-baby"
+        />
+      </div>
+    </div>
+    <!-- DOOM modal -->
+    <div id="doom-window" class="window hidden-modal">
+      <div class="title-bar">
+        <div class="title-bar-text">DOOM</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <img
+          src="https://win98icons.alexmeub.com/icons/png/msg_error-0.png"
+          alt="Error icon"
+        />
+        <p>
+          Error: DOOM is not supported on your PC. Try downloading more RAM.
+        </p>
+      </div>
+    </div>
+    <!-- Start menu -->
+    <div id="start-menu" class="start-menu hidden-modal window">
+      <div class="title-bar start-menu-bar">
+        <div class="title-bar-text rotate">Windows 98</div>
+        <!-- I can't figure out why this text wraps! -->
+      </div>
+      <div class="start-list">
+        <div class="start-item start-item--disabled">
+          <img
+            class="icon"
+            src="https://win98icons.alexmeub.com/icons/png/appwizard-4.png"
+          />Programs
+        </div>
+        <div class="start-item start-item--disabled">
+          <img
+            class="icon"
+            src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs_2k-4.png"
+          />Photos
+        </div>
+        <div class="start-item start-item--disabled">
+          <img
+            class="icon"
+            src="https://win98icons.alexmeub.com/icons/png/package-1.png"
+          />Applications
+        </div>
+        <div class="start-item start-item--disabled">
+          <img
+            class="icon"
+            src="https://win98icons.alexmeub.com/icons/png/mshearts.png"
+          />Games
+        </div>
+        <div class="start-item start-item--disabled">
+          <img
+            class="icon"
+            src="https://win98icons.alexmeub.com/icons/png/settings_gear-0.png"
+          />Settings
+        </div>
+        <div class="start-item start-item--disabled">
+          <img
+            class="icon"
+            src="https://win98icons.alexmeub.com/icons/png/search_file-1.png"
+          />Find
+        </div>
+        <div class="start-item start-item--disabled">
+          <img
+            class="icon"
+            src="https://win98icons.alexmeub.com/icons/png/help_book_cool-0.png"
+          />Help
+        </div>
+        <div class="start-item start-item--disabled">
+          <img
+            class="icon"
+            src="https://win98icons.alexmeub.com/icons/png/application_hourglass-0.png"
+          />Run
+        </div>
+        <div class="start-item start-item--disabled">
+          <img
+            class="icon"
+            src="https://win98icons.alexmeub.com/icons/png/key_win-2.png"
+          />Log off
+        </div>
+        <div id="shutdown" class="start-item">
+          <img
+            class="icon"
+            src="https://win98icons.alexmeub.com/icons/png/standby_monitor_moon_cool-4.png"
+          />Shutdown
+        </div>
+      </div>
+    </div>
+
+    <!-- Taskbar -->
+    <nav class="taskbar window">
       <div class="taskbar-content">
         <div class="start-button-container">
-          <button class="start-button">Start</button>
+          <button id="start-btn" class="start-button btn">
+            <img
+              src="assets/Windows_Logo_(1992-2001).svg"
+              class="start-logo"
+            />Start
+          </button>
         </div>
         <div class="open-apps"></div>
       </div>
-      <div class="clock"></div>
+      <div class="status-bar-field clock"></div>
     </nav>
   </body>
+  <!-- Icons courtesy of Alex Meub https://win98icons.alexmeub.com/ -->
+  <!-- Uses the 98.css stylesheet by jdan https://jdan.github.io/98.css/  -->
 </html>
